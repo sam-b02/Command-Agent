@@ -31,7 +31,7 @@ BASE_DIRECTORY = os.getcwd()  # Use current working directory at the start
 
 # Define local paths relative to BASE_DIRECTORY
 START_DIRECTORY = os.path.join(BASE_DIRECTORY, "access")
-PROMPT_FILE = os.path.join(BASE_DIRECTORY, "prompts", "bot.txt")
+PROMPT_FILE = os.path.join(BASE_DIRECTORY, "prompts", "bot.txt")#if you want to change your system prompt, change bot.txt to the name of the new file.
 MODEL_NAME = "claude-3-5-sonnet-20240620"
 OUTPUT_FILE = os.path.join(BASE_DIRECTORY, "outputs", "conversations.txt")
 OCR_OUTPUT = os.path.join(BASE_DIRECTORY, "outputs")

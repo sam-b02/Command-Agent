@@ -4,11 +4,7 @@
 
 # Pointing out the obvious
 
-This is completely unsafe and very stupid. No guardrails whatsoever. You are giving an LLM absolute control over your PC. Fun, but would not recommend you do this if you have anything valuable on your PC. 
-
-Repeating myself, this is very stupid.
-
-Also, as of now, the GPT version does not work. Please use the claude version.
+This is completely unsafe and very stupid. There are no guardrails whatsoever. You are giving an LLM absolute control over your PC. Fun, but would not recommend you do this if you have anything valuable on your PC. 
 
 ## Requirements
 
@@ -39,6 +35,7 @@ pip install openai python-dotenv rich pytesseract pillow
 
 2. **Set Up Environment Variables**:
    - Create a `.env` file in the root directory.
+   - Follow the structure of .env.example 
    - Add your Claude/OpenAI API key:
      ```plaintext
      ANTHROPIC_API_KEY=<your_api_key>

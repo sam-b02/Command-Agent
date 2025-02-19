@@ -45,25 +45,23 @@ Before installing Command Agent, ensure your system meets these prerequisites:
 
 ### Starting the Agent
 
-1. Navigate to the project directory and run:
+
+1. Customize the program to suit your needs:
+   - See Architecture below for specifics
+
+2. Run the program:
    ```bash
    python main.py
    ```
 
-2. Choose your operating mode:
-   - Enter a specific objective for guided mode
-   - Press Enter without input for autonomous mode
-
-3. Monitor the agent's progress:
-   - Watch real-time command execution
-   - Review conversation logs in the outputs directory
-   - Use Ctrl+C to safely terminate if needed
-
-## Features
-
-Command agent is pretty cool. It's got a bunch of commands and components it can use to accomplish the task you set out.
+3. Set objectives:
+   - Input your objective to give the AI a goal.
+   - Monitor the AI as it attempts the task
+   - Remember that you can hit Ctrl+C to cancel whatever it's doing, if it's getting out of hand.
 
 ## Architecture
+
+Command agent is pretty cool. It's got a bunch of commands and components it can use to accomplish the task you set out.
 
 ### Core Components
 

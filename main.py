@@ -8,17 +8,26 @@ import pytesseract
 load_dotenv()
 
 # Constants and configuration
-BASE_DIRECTORY = os.getcwd()
-START_DIRECTORY = os.path.join(BASE_DIRECTORY, "access")
-PROMPT_FILE = os.path.join(BASE_DIRECTORY, "prompts", "bot.txt")
-CONVERSATION_SUMMARY_MAX_LENGTH = 3000
+# Core Paths
+BASE_DIRECTORY = os.getcwd()  # Project root
+START_DIRECTORY = os.path.join(BASE_DIRECTORY, "access")  # Initial working directory
+PROMPT_FILE = os.path.join(BASE_DIRECTORY, "prompts", "bot.txt")  # System instructions
+
+# Conversation Management
+CONVERSATION_SUMMARY_MAX_LENGTH = 3000  # Token limit before summarization (None to disable summarization)
 CONVERSATION_SUMMARY_PATH = os.path.join(BASE_DIRECTORY, "prompts", "summary.txt")
-MODEL_NAME = "claude-3-5-sonnet-20240620"
+
+# API Configuration
+MODEL_NAME = "claude-3-5-sonnet-20240620"  # Claude model selection
+
+# Output Management
 OUTPUT_FILE = os.path.join(BASE_DIRECTORY, "outputs", "conversations.txt")
 OCR_OUTPUT = os.path.join(BASE_DIRECTORY, "outputs")
 PYTESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-OUTPUT_TOKEN_LIMIT = 1000
-SUMMARY_OUTPUT_TOKEN_LIMIT = 2000
+
+# Token Limits
+OUTPUT_TOKEN_LIMIT = 1000  # Standard response limit
+SUMMARY_OUTPUT_TOKEN_LIMIT = 2000  # Summary response limit
 
 client = anthropic.Anthropic()
 pytesseract.pytesseract.tesseract_cmd = PYTESSERACT_CMD

@@ -1,0 +1,49 @@
+This is a conversation between a user and another LLM.
+Please provide a summary of the conversation so far, focusing on:
+
+1. Key actions taken
+   - Commands executed
+   - Success/failure of each command
+   - Any errors encountered
+
+2. Current system state
+   - Working directory
+   - Active processes
+   - Pending operations
+
+3. File operations analysis
+   - Files modified/created/deleted
+   - Content changes
+   - Directory structure changes
+
+4. Performance analysis
+   - Command efficiency metrics
+   - Areas where clarification was needed
+   - Alternative approaches that could have been more efficient
+   - Patterns in user interaction that could be optimized
+
+5. Error analysis
+   - Root causes of any failures
+   - Recovery actions taken
+   - Preventive measures identified
+   - Common patterns in errors
+
+6. Current objective status
+   - Progress towards main goal
+   - Remaining tasks
+   - Potential roadblocks
+   - Estimated completion timeline
+
+7. Self-improvement insights
+   - Identified patterns in command usage
+   - Opportunities for automation
+   - Suggested workflow optimizations
+   - Knowledge gaps discovered
+
+Keep the context needed for continuing the objective. Being able to continue with their task is paramount.
+Do NOT return any other text than this, no other dialogue, NOTHING.
+Do NOT return whitespace only lines i.e, two \n's in a row.
+Details about files that have been read should be detailed, pertaining to content.
+You should give general summary of the list of files seen previously.
+BE AS DETAILED AS YOU CAN. DO NOT MAKE UP INFORMATION, DO NOT ADD YOUR OWN OPINION.
+If the list of files in the directory was recently called, list them.

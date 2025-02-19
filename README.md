@@ -1,89 +1,178 @@
 ﻿# Command Agent
 
-**Command Agent** is a python script that simulates a command-line interface which allows for LLM APIs to interact with your system and perform various system tasks. 
+**Command Agent** is a Python framework that enables AI language models (in particular, Claude) to interact with your system through a controlled command-line interface. In short, It serves as a makeshift bridge between file systems and LLMS.
 
-# Pointing out the obvious
+## IMMEDIATE NOTE
 
-This is completely unsafe and very stupid. There are no guardrails whatsoever. You are giving an LLM absolute control over your PC. Fun, but would not recommend you do this if you have anything valuable on your PC. 
+### THIS IS A DANGEROUS AND STUPID (albeit funny) THING TO DO. IT DOES NOT HAVE SAFETY CHECKS, IT DOES NOT HAVE SANDBOXING, NOTHING. BE CAREFUL.
 
-## Requirements
+## Installation
 
-### Prerequisites
-- **Os**: Windows
-- **Python**: >= 3.8
-- **Tesseract OCR**: Installed and configured (update `PYTESSERACT_CMD` if necessary).
-- **Claude API Access**: Valid API key loaded via `.env`.
+### System Requirements
 
-### Python Libraries
-Install dependencies via pip:
-```bash
-pip install anthropic python-dotenv rich pytesseract pillow
-```
+Before installing Command Agent, ensure your system meets these prerequisites:
 
-## Setup
+- Operating System: Windows
+- Python: Version 3.8 or higher
+- Tesseract OCR: Latest stable version
+- Claude API Access: Valid API key from Anthropic
 
-1. **Clone the Repository**:
+### Installation Steps
+
+1. First, clone the repository and navigate to the project directory:
    ```bash
    git clone https://github.com/sam-b02/Command-Agent
    cd Command-Agent
    ```
 
-2. **Set Up Environment Variables**:
-   - Create a `.env` file in the root directory.
-   - Follow the structure of .env.example 
-   - Add your Claude API key:
-     ```plaintext
-     ANTHROPIC_API_KEY=<your_api_key>
-     ```
-
-3. **Configure Paths**:
-   - Ensure `PYTESSERACT_CMD` matches your local Tesseract OCR installation path.
-
-## Usage
-
-1. **Run the Program**:
+2. Install the required Python dependencies:
    ```bash
-   python claude_vers.py
+   pip install anthropic python-dotenv Pillow pytesseract
    ```
 
-2. **Interact via Console**:
-   - The terminal prompts for your objective.
-   - The bot will then gain control of your cmd, allowing it to accomplish the objective you give it.
+3. Configure your environment:
+   - Create a new `.env` file in the root directory
+   - Add your Anthropic API key:
+     ```plaintext
+     ANTHROPIC_API_KEY=your_key_here
+     ```
 
-3. **Supported Commands**:
-   - **OCR**: `ocr <file_path>` - Extract text from an image.
-   - **Directory**: `directory <path>` - Change the working directory.
-   - **List**: `list <path>` - List directory contents.
-   - **Read**: `read <file_path>` - Display file content with syntax highlighting.
-   - **Write**: `write <mode> <file_path> <content>` - Write to a file (modes: `w`, `a`).
-   - **Question**: `question <prompt>` - Ask for user input interactively.
-   - Any valid shell command.
+4. Update the system configuration in the code:
+   - Set the correct path for `PYTESSERACT_CMD`
+   - Verify all paths in the configuration section match your system
 
-   Please Note - the bot cannot interact with any python file that requires inputs as of now. You will be forced to restart the program.
+## Usage Guide
 
-4. **Exit the Program**:
-   - Press `Ctrl+C` at any time to exit.
+### Starting the Agent
 
+1. Navigate to the project directory and run:
+   ```bash
+   python main.py
+   ```
 
-## File Structure
+2. Choose your operating mode:
+   - Enter a specific objective for guided mode
+   - Press Enter without input for autonomous mode
 
+3. Monitor the agent's progress:
+   - Watch real-time command execution
+   - Review conversation logs in the outputs directory
+   - Use Ctrl+C to safely terminate if needed
+
+## Features
+
+Command agent is pretty cool. It's got a bunch of commands and components it can use to accomplish the task you set out.
+
+## Architecture
+
+### Core Components
+
+#### Available Commands
+
+The system supports these primary command categories:
+
+**File Operations:**
+```
+list [path]           - Display directory contents
+read [file_path]      - Show file contents
+write [mode] [path] [content] - Write to file
+```
+
+**Navigation:**
+```
+directory            - Show current location
+directory [path]     - Change working directory
+```
+
+**Document Analysis:**
+```
+OCR [file_path]  - Performs OCR on file
+```
+
+**System Interaction:**
+```
+question [prompt]    - Request user input for issues
+[system command]     - Execute (ANY) valid CMD commands
+```
+
+### Configuration
+
+The system uses these important configuration constants:
+
+```python
+# Core Paths
+BASE_DIRECTORY = os.getcwd()  # Project root
+START_DIRECTORY = os.path.join(BASE_DIRECTORY, "access")  # Initial working directory
+PROMPT_FILE = os.path.join(BASE_DIRECTORY, "prompts", "bot.txt")  # System instructions
+
+# Conversation Management
+CONVERSATION_SUMMARY_MAX_LENGTH = 3000  # Token limit before summarization (None to disable summarization)
+CONVERSATION_SUMMARY_PATH = os.path.join(BASE_DIRECTORY, "prompts", "summary.txt")
+
+# API Configuration
+MODEL_NAME = "claude-3-5-sonnet-20240620"  # Claude model selection
+
+# Output Management
+OUTPUT_FILE = os.path.join(BASE_DIRECTORY, "outputs", "conversations.txt")
+OCR_OUTPUT = os.path.join(BASE_DIRECTORY, "outputs")
+PYTESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+# Token Limits
+OUTPUT_TOKEN_LIMIT = 1000  # Standard response limit
+SUMMARY_OUTPUT_TOKEN_LIMIT = 2000  # Summary response limit
+```
+
+## Operating Modes
+
+Command Agent supports two primary operating modes:
+
+1. **Guided Mode**
+   - Uses instructions from `bot.txt`
+   - Follows specific user objectives
+   - Maintains structured command execution
+   - Focuses on task completion
+
+2. **Autonomous Mode**
+   - Uses instructions from `explore.txt`
+   - Performs independent system exploration
+   - Much more risk likely - more fun, less work.
+
+## Project Structure
+
+The repository follows this organization:
 ```
 project_root/
 ├── access/               # Default working directory
-├── outputs/              # Contains saved conversations and OCR results
-├── prompts/              # Directory for prompt files (e.g., `bot.txt`, `explore.txt`)
-├── .env                  # Environment variables
-├── main.py            # Claude version of the script
+├── outputs/             
+│   ├── conversations/    # Conversation logs
+│   └── analysis/        # Document processing results
+├── prompts/             
+│   ├── bot.txt          # Guided mode instructions
+│   ├── explore.txt      # Autonomous mode instructions
+│   └── summary.txt      # Conversation summarization rules
+└── .env                 # Environment configuration
 ```
 
-## Customization
+## Limitations and Considerations
 
-1. **Choose System prompt**:
-   - change `PROMPT_FILE` to one of two system prompts, located in the prompts directory
+Command Agent has several important limitations to consider:
 
+- Windows-only compatibility
+- Cannot run scripts that require inputs
+- Absence of sandboxing mechanisms (NONE)
+- Memory constraints with large files
+
+## Future Development
+
+Current development priorities include:
+
+- Implementing unified file analysis capabilities
+- Adding screen capture functionality
+- Developing mouse movement control
 
 ## License
 
-The license for this project can be found [here.](LICENSE)
-
-Ensure compliance with Tesseract's and Anthropic's licensing terms if redistributed.
+This project is licensed under [LICENSE]. When using or redistributing, ensure compliance with all third-party licenses, including:
+- Tesseract OCR
+- Anthropic's Claude API
+- Other included dependencies

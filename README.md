@@ -12,18 +12,13 @@ This is completely unsafe and very stupid. There are no guardrails whatsoever. Y
 - **Os**: Windows
 - **Python**: >= 3.8
 - **Tesseract OCR**: Installed and configured (update `PYTESSERACT_CMD` if necessary).
-- **Claude/OpenAI API Access**: Valid API key loaded via `.env`.
+- **Claude API Access**: Valid API key loaded via `.env`.
 
 ### Python Libraries
 Install dependencies via pip:
 ```bash
 pip install anthropic python-dotenv rich pytesseract pillow
 ```
-OR
-```bash
-pip install openai python-dotenv rich pytesseract pillow
-```
-
 
 ## Setup
 
@@ -36,10 +31,9 @@ pip install openai python-dotenv rich pytesseract pillow
 2. **Set Up Environment Variables**:
    - Create a `.env` file in the root directory.
    - Follow the structure of .env.example 
-   - Add your Claude/OpenAI API key:
+   - Add your Claude API key:
      ```plaintext
      ANTHROPIC_API_KEY=<your_api_key>
-     OPENAI_API_KEY=<your_api_key>
      ```
 
 3. **Configure Paths**:
@@ -50,10 +44,6 @@ pip install openai python-dotenv rich pytesseract pillow
 1. **Run the Program**:
    ```bash
    python claude_vers.py
-   ```
-OR
-   ```bash
-   python gpt_vers.py
    ```
 
 2. **Interact via Console**:
@@ -83,8 +73,7 @@ project_root/
 ├── outputs/              # Contains saved conversations and OCR results
 ├── prompts/              # Directory for prompt files (e.g., `bot.txt`, `explore.txt`)
 ├── .env                  # Environment variables
-├── claude_vers.py            # Claude version of the script
-├── gpt_vers.py            # GPT version of the script
+├── main.py            # Claude version of the script
 ```
 
 ## Customization
@@ -97,4 +86,4 @@ project_root/
 
 The license for this project can be found [here.](LICENSE)
 
-Ensure compliance with Tesseract's, OpenAI's and Anthropic's licensing terms if redistributed.
+Ensure compliance with Tesseract's and Anthropic's licensing terms if redistributed.

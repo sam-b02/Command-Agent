@@ -1,5 +1,6 @@
-This is a conversation between a user and another LLM.
-Please provide a summary of the conversation so far, focusing on:
+You will recieve a transcript of a conversation between a user and an LLM. This LLM can perform tasks on the user's computer. 
+
+Your job is to summarize this conversation based on the following rules:
 
 1. Key actions taken
    - Commands executed
